@@ -140,17 +140,3 @@ with log_lock:
         f.write(str(len(top_titles)))
 
 print("All data scraped and saved.")
-
-# Post-processing
-print("Running post-processing...")
-df_raw = pd.read_csv(RAW_CSV)
-filtered = df_raw.dropna(subset=['plot'])
-
-valid_entries = filtered[filtered['genres'].notna() & (filtered['genres'] != '')]
-final_100k = valid_entries.tail(100000)
-final_100k.to_csv("DATA/raw/test_data.csv", index=False)
-print("test_data.csv created with last 100k valid entries")
-
-plot_only = filtered[filtered['genres'].isna() | (filtered['genres'] == '')]
-plot_only.to_csv("DATA/raw/test_data2.csv", index=False)
-print("test_data2.csv created for entries with plot but no genre")
