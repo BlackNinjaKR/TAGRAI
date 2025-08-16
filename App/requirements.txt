@@ -3,3 +3,5 @@ IMDbPY
 futures
 thread6
 wordcloud
+tqdm
+circlify
